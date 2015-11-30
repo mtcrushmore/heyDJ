@@ -1,0 +1,21 @@
+{
+  "name": "heyDJ",
+  "homepage": "https://github.com/mtcrushmore/heyDJ",
+  "description": "Everyone is the DJ",
+  "main": "",
+  "moduleType": [],
+  "authors": [
+    "rSmith"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8"
+  }
+}
