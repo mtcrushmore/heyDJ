@@ -29,7 +29,7 @@ module.exports = {
 		var state = generateRandomString(16);
 		res.cookie(stateKey, state);
 
-		var scope = 'user-read-private user-read-email';
+		var scope = 'user-read-private user-read-email playlist-modify-private playlist-modify-public';
 		res.redirect('https://accounts.spotify.com/authorize?' +
 			querystring.stringify({
 				response_type: 'code',
@@ -127,9 +127,13 @@ module.exports = {
 			json: true,
 		};
 
-		request.get(options, function(err, res, body) {
-			if (body) {
-				console.log(body);
+		request.get(options, function(err, response, body) {
+			if (body['items']) {
+				for (var i = 0; i < body['items'].length; i++) {
+					console.log(body['items'][i]['track']);
+					console.log(body['items'][i]['track']['artists'][0]['name']);
+				}
+				// console.log(body['items']);
 			}
 			// res.send(body);
 		});
@@ -139,7 +143,7 @@ module.exports = {
 	addSong: function(req, res) {
 		//POST /v1/users/{user_id}/playlists/{playlist_id}/tracks/{spotify_track_uri}
 		var options = {
-			url: 'https://api.spotify.com/v1/users/1261637495/playlists/1V6EjVyGhaGexesBtpXfQx/tracks/spotify:track:3An0IzRGfCV2q5KKEAA9Wm',
+			url: 'https://api.spotify.com/v1/users/1261637495/playlists/1V6EjVyGhaGexesBtpXfQx/tracks?uris=spotify:track:3qtpVUsQzvHdMzrmqkdOzP',
 			headers: {
 				'Authorization': 'Bearer ' + access_token,
 				'Content-Type': 'application/json',
@@ -147,14 +151,15 @@ module.exports = {
 			json: true,
 		};
 
-		request.post(options, function(err, res, body) {
-			// console.log(res);
-			if (err) { console.log(err) };
-			if (body) {
-				console.log('in spotify.addSong body');
-				// console.log(body);
+		request.post(options, function(err, response, body) {
+
+			if (err) { 
+				console.log(err);
+				console.log('error');
+			} else {
+				res.sendStatus(201);
 			}
-			// res.end();
+
 		});
 
 	},
