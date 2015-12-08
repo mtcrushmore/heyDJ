@@ -22,16 +22,16 @@ module.exports = {
 
 	},
 
-	upvoteSong: function(req, res, next) {
+	voteSong: function(req, res, next) {
 
 		/* access playlist in mongoDB, then check if 
 		rank has changed, if so, change in DB, change in Spotify */
+		/* parameter will include up or down */
 		//changeRank will be a recursive function
+		// spotify.voteSong(req, res);
 
 	},
 
-	downvoteSong: function(req, res, next) {},
-
-	changeRank: function(req, res, next) {},
+	// changeRank: function(req, res, next) {},
 
 };
