@@ -15,6 +15,12 @@ module.exports = {
 
 	},
 
+	search: function(req, res, next) {
+
+		spotify.search(req, res);
+
+	},
+
 	addSong: function(req, res, next) {
 
 		spotify.addSong(req, res);

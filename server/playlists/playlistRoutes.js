@@ -4,6 +4,7 @@ module.exports = function(app) {
 
 	app.post('/createPlaylist', playlistCtrl.createPlaylist);
 	app.get('/getPlaylist', playlistCtrl.getPlaylist);
+	app.get('/search', playlistCtrl.search);
 	app.post('/addSong', playlistCtrl.addSong);
 	app.post('/voteSong', playlistCtrl.voteSong);
 	app.put('/reorderPlaylist', playlistCtrl.reorderPlaylist);

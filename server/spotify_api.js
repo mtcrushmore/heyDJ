@@ -140,6 +140,34 @@ module.exports = {
 
 	},
 
+	search: function(req, res) {
+
+		var options = {
+			url: 'https://api.spotify.com/v1/search?q=you%20are%20what%20you%20is&type=album,artist,track',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			json: true,
+			// body: {
+			// 	'q': 'james brown',
+			// }
+		};
+
+		request.get(options, function(err, response, body) {
+			if (err) { 
+				console.log(err);
+				console.log('error');
+			} else {
+				/* body: {
+					tracks,
+					albums,
+					artists
+				} */
+				res.sendStatus(201);
+			};
+		});
+	},
+
 	addSong: function(req, res) {
 		//POST /v1/users/{user_id}/playlists/{playlist_id}/tracks/{spotify_track_uri}
 		var options = {
