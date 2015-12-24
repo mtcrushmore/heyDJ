@@ -15,10 +15,22 @@ module.exports = {
 
 	},
 
+	search: function(req, res, next) {
+
+		spotify.search(req, res);
+
+	},
+
 	addSong: function(req, res, next) {
 
 		spotify.addSong(req, res);
 		// playlist.addSong(req, res);
+
+	},
+
+	reorderPlaylist: function(req, res, next) {
+
+		spotify.reorderPlaylist(req, res);
 
 	},
 

@@ -140,10 +140,38 @@ module.exports = {
 
 	},
 
+	search: function(req, res) {
+
+		var options = {
+			url: 'https://api.spotify.com/v1/search?q=you%20are%20what%20you%20is&type=album,artist,track',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			json: true,
+			// body: {
+			// 	'q': 'james brown',
+			// }
+		};
+
+		request.get(options, function(err, response, body) {
+			if (err) { 
+				console.log(err);
+				console.log('error');
+			} else {
+				/* body: {
+					tracks,
+					albums,
+					artists
+				} */
+				res.sendStatus(201);
+			};
+		});
+	},
+
 	addSong: function(req, res) {
 		//POST /v1/users/{user_id}/playlists/{playlist_id}/tracks/{spotify_track_uri}
 		var options = {
-			url: 'https://api.spotify.com/v1/users/1261637495/playlists/1V6EjVyGhaGexesBtpXfQx/tracks?uris=spotify:track:3qtpVUsQzvHdMzrmqkdOzP',
+			url: 'https://api.spotify.com/v1/users/1261637495/playlists/1V6EjVyGhaGexesBtpXfQx/tracks?uris=spotify:track:1SARbfnOIcuohWfh4pdLuC',
 			headers: {
 				'Authorization': 'Bearer ' + access_token,
 				'Content-Type': 'application/json',
@@ -158,23 +186,36 @@ module.exports = {
 				console.log('error');
 			} else {
 				res.sendStatus(201);
-			}
+			};
 
 		});
 
 	},
 
 	reorderPlaylist: function(req, res) {
-		/* called from playlist model (after upvote/downvote, will check if song after/previous is
-			outranked ... if so, order will be switched) 
-			*/
 
-		//PUT 
-		/* {
-		  "range_start": 1,
-		  "range_length": 2,
-		  "insert_before": 3
-		} */
+		var options = {
+			url: 'https://api.spotify.com/v1/users/1261637495/playlists/1V6EjVyGhaGexesBtpXfQx/tracks',
+			headers: {
+				'Authorization': 'Bearer ' + access_token,
+				'Content-Type': 'application/json',
+			},
+			json: true,
+			body: {
+				'range_start': 3,
+				'insert_before': 0,
+			},
+		};
+
+		request.put(options, function(err, response, body) {
+			if (err) { 
+				console.log(err);
+				console.log('error');
+			} else {
+				res.sendStatus(201);
+			};
+		});
+
 	},
 
 };
