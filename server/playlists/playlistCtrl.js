@@ -22,6 +22,12 @@ module.exports = {
 
 	},
 
+	reorderPlaylist: function(req, res, next) {
+
+		spotify.reorderPlaylist(req, res);
+
+	},
+
 	voteSong: function(req, res, next) {
 
 		/* access playlist in mongoDB, then check if 
