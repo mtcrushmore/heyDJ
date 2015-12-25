@@ -17,6 +17,11 @@ var path = {
 	ENTRY_POINT: './client/src/mainview.jsx'
 };
 
+gulp.task('copy', function() {
+	gulp.src(path.HTML)
+		.pipe(gulp.dest(path.DEST));
+});
+
 gulp.task('watch', function() {
 
 	gulp.watch(path.HTML, ['copy']);
@@ -77,7 +82,7 @@ gulp.task('finished', function() {
 	console.log('Production code was successfully built.')
 });
 
-gulp.task('default', ['copy', 'watch', 'nodemon']);
+gulp.task('default', ['copy', 'watch', 'build', 'nodemon']);
 
 gulp.task('production', ['copy', 'build', 'finished']);
 
