@@ -1,7 +1,8 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { BabelTest } from './babel-test';
 
-var MainView = React.createClass({
+const MainView = React.createClass({
 
 	getInitialState: function() {
 		return {
@@ -15,6 +16,7 @@ var MainView = React.createClass({
 			<div>
 				<h1> hey DJ! </h1>
 				<a href='user/loginToSpotify' className='btn btn-primary'>Log In To Spotify</a>
+				<BabelTest />
 			</div>
 			)
 	},
