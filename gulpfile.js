@@ -13,7 +13,7 @@ var path = {
 	DEST: 'dist',
 	DEST_BUILD: 'dist/build',
 	DEST_SRC: 'dist/src',
-	ENTRY_POINT: './client/src/mainview.jsx'
+	ENTRY_POINT: './client/src/components/mainview.jsx'
 };
 
 gulp.task('copy', function() {
@@ -34,7 +34,7 @@ gulp.task('build', function() {
 });
 
 gulp.task('watch', ['build'], function() {
-	gulp.watch('client/src/**/*.{ js, jsx }', ['build']);
+	gulp.watch('client/src/components/**/*.{ js, jsx }', ['build']);
 });
 
 gulp.task('nodemon', function() {

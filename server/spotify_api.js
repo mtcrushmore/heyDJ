@@ -45,7 +45,7 @@ module.exports = {
 
 	},
 
-	callback: function(req, res) {
+	callback: function(req, res, cb) {
 
 		let authOptions;
 		let code = req.query.code || null;
@@ -91,7 +91,14 @@ module.exports = {
 
 				request.get(options, function(err, res, body) {
 					user_id = body.id;
-					console.log(body);
+					
+					let response = {
+						user_id: body.id,
+						access_token: access_token,
+						refresh_token: refresh_token,
+					};
+
+					cb(response);
 				});
 			}
 		});
