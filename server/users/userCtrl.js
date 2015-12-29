@@ -8,12 +8,28 @@ module.exports = {
 
 	},
 
-	loginToPlaylist: function(req, res, next) {},
+	loginToPlaylist: function(req, res, next) {
+
+
+
+	},
+
+	authenticateUser: function(req, res, next) {
+
+		console.log('authenticating user ...');
+
+		next();
+
+	},
 
 	callback: function(req, res, next) {
 
-		spotify.callback(req, res);
-		res.send('logged in!!');
+		spotify.callback(req, res, function(response) {
+			console.log(response);
+			reponse = JSON.stringify(response);
+			res.setHeader('Auth', response)
+			res.redirect('/');
+		});
 
 	},
 

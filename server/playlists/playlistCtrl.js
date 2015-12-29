@@ -1,5 +1,7 @@
+'use strict'
+
 var jwt = require('jsonwebtoken');
-var spotify = require('./../spotify_api.js');
+var Spotify = require('./../spotify_api.js');
 var q = require('q');
 var playlist = require('./playlistModel.js');
 
@@ -7,30 +9,43 @@ var playlist = require('./playlistModel.js');
 
 module.exports = {
 
-	createPlaylist: function(req, res, next) {},
+	createPlaylist: function(req, res, next) {
+		let token = req.body.token;
+		let name = req.body.name;
+		Spotify.createPlaylist(token, name, function(body) {
+			console.log(body);
+			res.status(200).send(body);
+		});
+
+	},
 
 	getPlaylist: function(req, res, next) {
 
-		spotify.getPlaylist(req, res);
+		Spotify.getPlaylist(req, res);
 
 	},
 
 	search: function(req, res, next) {
 
-		spotify.search(req, res);
+		var searchTerm = 'James Brown';
+
+		Spotify.search(searchTerm, function(results) {
+			console.log('results from playlistCtrl:', results);
+			res.sendStatus(201);
+		});
 
 	},
 
 	addSong: function(req, res, next) {
 
-		spotify.addSong(req, res);
+		Spotify.addSong(req, res);
 		// playlist.addSong(req, res);
 
 	},
 
 	reorderPlaylist: function(req, res, next) {
 
-		spotify.reorderPlaylist(req, res);
+		Spotify.reorderPlaylist(req, res);
 
 	},
 
@@ -40,7 +55,7 @@ module.exports = {
 		rank has changed, if so, change in DB, change in Spotify */
 		/* parameter will include up or down */
 		//changeRank will be a recursive function
-		// spotify.voteSong(req, res);
+		// Spotify.voteSong(req, res);
 
 	},
 
