@@ -26,6 +26,8 @@ module.exports = {
 
 		spotify.callback(req, res, function(response) {
 			console.log(response);
+			reponse = JSON.stringify(response);
+			res.setHeader('Auth', response)
 			res.redirect('/');
 		});
 
