@@ -1,3 +1,5 @@
+'use strict'
+
 var jwt = require('jsonwebtoken');
 var Spotify = require('./../spotify_api.js');
 var q = require('q');
@@ -8,8 +10,12 @@ var playlist = require('./playlistModel.js');
 module.exports = {
 
 	createPlaylist: function(req, res, next) {
-
-		Spotify.createPlaylist(req, res);
+		let token = req.body.token;
+		let name = req.body.name;
+		Spotify.createPlaylist(token, name, function(body) {
+			console.log(body);
+			res.status(200).send(body);
+		});
 
 	},
 

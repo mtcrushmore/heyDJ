@@ -131,19 +131,19 @@ module.exports = {
 
 	},
 
-	createPlaylist: function(req, res) {
+	createPlaylist: function(token, name, callback) {
 
 		let params = {
-			'name': 'New hey DJ Playlist!!',
+			'name': name,
 			'public': false,
 		};
 
 		let options = {
-			url: 'https://api.spotify.com/v1/users/' + user_id + '/playlists',
+			url: 'https://api.spotify.com/v1/users/1261637495/playlists',
 			body: JSON.stringify(params),
 			dataType: 'json',
 			headers: {
-				'Authorization': 'Bearer ' + access_token,
+				'Authorization': 'Bearer ' + token,
 				'Content-Type': 'application/json',
 			},
 		};
@@ -153,9 +153,7 @@ module.exports = {
 			if (err) { 
 				console.log(err);
 			} else {
-				body = JSON.parse(body);
-				playlist_id = body.id;
-				res.sendStatus(playlist_id);
+				callback(body);
 			};
 
 		});

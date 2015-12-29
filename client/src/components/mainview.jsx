@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import { Login } from './login/login';
+import { PlayList } from './playlist/playlist';
 
 class MainView extends React.Component {
 
@@ -12,6 +13,7 @@ class MainView extends React.Component {
 		this.state = {
 			userType: null,
 			loggedIn: false,
+			token: null,
 		};
 	}
 
@@ -31,18 +33,23 @@ class MainView extends React.Component {
 	changed to indicate that the client is logged in as the DJ. */
 	componentWillMount () {
 		if (this.getHashParams().access_token) {
+			let access_token = this.getHashParams().access_token;
 			this.setState({
 				userType: 'spotifyDJ',
 				loggedIn: true,
+				token: access_token,
 			})
 		};
 	}
+
+	/*Views: navbar, login, playlist */
 
 	render () {
 		return (
 			<div>
 				<h1> hey DJ! </h1>
 				{ !this.state.loggedIn ? <Login loggedIn={ this.state.loggedIn } /> : null }
+				{ this.state.loggedIn ? <PlayList token={ this.state.token } /> : null }
 			</div>
 			)
 	}
